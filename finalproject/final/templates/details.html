@@ -1,0 +1,29 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Details
+{% endblock %}
+
+{% block main %}
+<div class="w3-padding">
+  <div class="w3-container my_dark_blue">
+    <h2 class="w3-center"><strong>{{ reports[0]["ass_name"] }} Report</strong></h2>
+  </div>
+  <table class="w3-table w3-bordered w3-border w3-hoverable my_light_blue">
+  <thead>
+      <tr>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Score</th>
+      </tr>
+  </thead>
+  {% for rep in reports %}
+    <tr>
+      <td>{{ rep["time"] }}</td>
+      <td>{{ rep["name"] }}</td>
+      <td>{{ rep["score"] }}</td>
+    </tr>
+  {% endfor %}
+  </table><br>
+</div>
+{% endblock %}

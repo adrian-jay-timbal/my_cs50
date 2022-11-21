@@ -1,0 +1,118 @@
+body, h1, h2, h3, h4, h5, h6 {
+  font-family: Georgia, serif;
+}
+
+.zone
+{
+    font-size:100px;
+}
+
+.navicon
+{
+    background-color: blue;
+}
+
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+}
+
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+
+}
+
+body
+{
+    background-color: #e6e6e6;
+}
+
+.login_container
+{
+    margin-top: 30px;
+    margin-bottom:80px;
+}
+
+.login_img
+{
+    height: 70px;
+    width: 50;
+}
+
+.adviser_info
+{
+    text-align: center;
+}
+
+.dashboard:hover
+{
+    padding: 50px;
+    transition: all 0.3s ease-in-out;
+}
+
+.my_count
+{
+    position:fixed;
+    margin-top:40px;
+}
+
+.philarea
+{
+    height:20vh;
+}
+
+.messenger
+{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 35px;
+}
+
+/*colors*/
+.my_dark_blue
+{
+    background-image: linear-gradient(to bottom, #001433 0%, #66a3ff 100%);
+    background-size: 100%;
+}
+
+.my_light_blue
+{
+    background-image: linear-gradient(to bottom, #ffffff 0%, #66a3ff 100%);
+    background-size: 100%;
+}
+
+.reverse_db
+{
+    background-color: #001433;
+}
+
+.my_logo
+{
+    background-image: linear-gradient(to bottom, #0066ff 0%, #ff33cc 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.my_philosophy
+{
+    background-image: linear-gradient(to bottom, #0066ff 0%, #ff33cc 100%);
+    background-size: 100%;
+}

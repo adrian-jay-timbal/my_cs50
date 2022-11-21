@@ -1,0 +1,56 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Setttings
+{% endblock %}
+
+{% block main %}
+<br>
+<div class="w3-margin w3-card my_light_blue">
+  {% if user[0]['position'] == 'teacher' %}
+    <div class="w3-container my_dark_blue">
+        <h2>My Students</h2>
+    </div><br>
+  {% else %}
+    <div class="w3-container my_dark_blue">
+        <h2>My Classmantes</h2>
+    </div><br>
+  {% endif %}
+
+  {% for student in students %}
+  <div class="w3-panel">
+      <div class="w3-row-padding" style="margin:0 -16px">
+          <div class="w3-third">
+              <h3 class="w3-center">{{ student["sayings"] }}</h3>
+          </div>
+          <div class="w3-twothird">
+            <table class="w3-table w3-striped w3-white">
+              <tr>
+                <td><i class="fa fa-users w3-text-blue w3-large"></i></td>
+                <td>First Name</td>
+                <td><i>{{ student["firstname"] }}</i></td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-user w3-text-red w3-large"></i></td>
+                <td>Last Name</td>
+                <td><i>{{ student["lastname"] }}</i></i></td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-building w3-text-yellow w3-large"></i></td>
+                <td>Age</td>
+                <td><i>{{ student["age"]}}</i></td>
+              </tr>
+              <tr>
+                <td><i class="fa fa-building w3-text-red w3-large"></i></td>
+                <td>School</td>
+                <td><i>{{ student["school"] }}</i></td>
+              </tr>
+            </table>
+          </div>
+      </div>
+  </div>
+  <hr>
+  {% endfor %}
+</div>
+
+{% endblock %}

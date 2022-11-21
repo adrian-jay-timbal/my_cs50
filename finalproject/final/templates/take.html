@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ZONE: Exam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link href="/static/styles.css" rel="stylesheet">
+    <link href="/static/images/z.png" rel="icon">
+    <style>
+        html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+    </style>
+  </head>
+  <body class="w3-light-grey">
+
+    <!-- Top container -->
+    <div class="w3-bar w3-top reverse_db" style="z-index:4">
+        <button class="w3-bar-item w3-button w3-text-blue w3-hide-large w3-hover-none w3-hover-text-pink" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+        <h4 class="w3-margin-right w3-right my_logo"><strong>ZONE</strong></h4>
+    </div>
+
+    <div class="w3-main" style="margin-top:43px;">
+      <div class="w3-padding w3-display-topright w3-pink my_count" id="countdown">Start</div>
+      <div class="w3-padding">
+        <form action="/take" method="POST">
+          <div class="ranout">
+            <h3>Start Here:</h3>
+            <button class="w3-btn w3-block w3-blue w3-hover-pink" type="submit"><strong>Submit Answer</strong></button>
+            {% for question in questions %}
+              <div>
+                  <h5>{{ question["number"] }}. {{ question["question"] }}</h5>
+                  {% if active[0]["type"] != "identification" %}
+                    <div class="w3-padding">
+                      {% for option in options %}
+                        {% if option["question_id"] == question["id"] %}
+                          <input class="w3-radio" type="radio" name="{{ question['number'] }}" value="a">
+                          <label>a. {{ option["a"] }}</label><br>
+                          <input class="w3-radio" type="radio" name="{{ question['number'] }}" value="b">
+                          <label>b. {{ option["b"] }} </label><br>
+                          <input class="w3-radio" type="radio" name="{{ question['number'] }}" value="c">
+                          <label>c. {{ option["c"] }} </label><br>
+                          <input class="w3-radio" type="radio" name="{{ question['number'] }}" value="d">
+                          <label>d. {{ option["d"] }} </label><br>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    <input class="w3-input w3-animate-input" placeholder="answer" type="text" name="{{ question['number'] }}" style="width:30%">
+                  {% endif %}
+              </div>
+            {% endfor %}
+          </div><br>
+          <button class="w3-btn w3-block w3-blue w3-hover-pink" type="submit"><strong>Submit Answer</strong></button>
+        </form>
+      </div>
+      <div class="w3-padding" style="display:none" id="timeout">
+        <h1>You ran out of time.</h1>
+      </div>
+    </div>
+    <hr>
+    <footer class="w3-container w3-padding-10 w3-light-grey">
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    </footer>
+
+    <script>
+      let main = document.querySelector('.ranout')
+      let timeout = document.querySelector('#timeout')
+      const start = {{ q_len }};
+      let time = start * 60;
+      const element = document.querySelector('#countdown');
+
+      var laps = window.setInterval(elupdate, 1000);
+
+      function elupdate()
+      {
+        if ( time <= 0 )
+        {
+          window.clearInterval(laps);
+          main.style.display = 'none';
+          timeout.style.display = 'block';
+        }
+
+        const minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        element.innerHTML = minutes + ':' + seconds;
+        time--;
+      }
+    </script>
+  </body>
+</html>

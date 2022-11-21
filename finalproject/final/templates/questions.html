@@ -1,0 +1,97 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Assessments
+{% endblock %}
+
+{% block main %}
+<div class="w3-padding">
+  <div class="w3-card-4">
+    <div class="w3-container my_dark_blue">
+      <h2 class="w3-center"><strong>Add Question</strong></h2>
+    </div>
+    <form action="/questions" method="POST" class="w3-container w3-padding-24 my_light_blue">
+      <div class="w3-row-padding">
+        <h5><strong>Title: {{ assessments[0]["title"] }}</strong></h5>
+        <h5>Question Number {{ number }}</h5>
+        <div>
+          <label></label>
+          <textarea class="w3-input w3-border" name="question" type="text" placeholder="Write your question." required></textarea>
+        </div>
+      </div><br>
+      {% if assessments[0]["type"] == "choices" %}
+        <h5>Add atleast 2 options:</h5>
+        <div class="w3-row-padding" style="margin-bottom:50px">
+          <div class="w3-half">
+            <div>
+              <label><h5>a.</h5></label>
+              <input class="w3-input w3-border" type="text" placeholder="option" name="option_a" required>
+            </div>
+            <div>
+              <label><h5>b.</h5></label>
+              <input class="w3-input w3-border" type="text" placeholder="option" name="option_b" required>
+            </div>
+          </div>
+          <div class="w3-half">
+            <div>
+              <label><h5>c.</h5></label>
+              <input class="w3-input w3-border" type="text" placeholder="option" name="option_c">
+            </div>
+            <div>
+              <label><h5>d.</h5></label>
+              <input class="w3-input w3-border" type="text" placeholder="option" name="option_d">
+            </div>
+          </div>
+        </div>
+        <div>
+          <label><h5>Answer:</h5></label>
+          <select class="w3-select w3-border" name="answer">
+            <option value="" disabled selected>Choose your answer</option>
+            <option value="a">Option a</option>
+            <option value="b">Option b</option>
+            <option value="c">Option c</option>
+            <option value="d">Option d</option>
+          </select>
+        </div><br>
+      {% elif assessments[0]["type"] == "identification" %}
+        <div>
+          <label><h5>Answer</h5></label>
+          <input class="w3-input w3-border" type="text" placeholder="Correct Answer" name="answer" required>
+        </div><br>
+      {% endif %}
+      <button class="w3-btn w3-block w3-hover-pink w3-blue"><strong>Add</strong></button>
+      <small class="w3-text-pink">Review your inputs before adding to avoid unnecessary actions.</small><br>
+      <small class="w3-text-pink">Click DONE after adding all of your questions for this assessment.</small>
+    </form>
+    <form action="/assessment">
+      <button class="w3-btn w3-block w3-hover-pink w3-blue" type="submit">DONE</button>
+    </form>
+  </div>
+</div>
+<div class="w3-padding">
+  <h3>Questions:</h3>
+  <div class="w3-right">
+    <form action="/d_questions" method="POST">
+      <input type="hidden" value="{{ assessments[0]['id'] }}" name="ass_id">
+      <button class="w3-blue w3-hover-pink w3-button" type="submit">Delete</button>
+    </form>
+  </div>
+  <table class="w3-table w3-bordered w3-border w3-hoverable my_light_blue">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Question</th>
+            <th>Answer</th>
+        </tr>
+    </thead>
+    {% for q in questions %}
+      <tr>
+        <td>{{ q["number"] }}</td>
+        <td>{{ q["question"] }}</td>
+        <td>{{ q["answer"] }}</td>
+      </tr>
+    {% endfor %}
+  </table><br>
+</div>
+{% endblock %}
+

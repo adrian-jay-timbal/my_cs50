@@ -1,0 +1,57 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Assessments
+{% endblock %}
+
+{% block main %}
+<div class="w3-padding">
+    <div class="w3-card-4">
+        <div class="w3-container my_dark_blue">
+            <h2 class="w3-center"><strong>Deploy</strong></h2>
+        </div>
+    </div>
+</div>
+<div>
+    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable my_light_blue">
+        <thead>
+            <tr>
+              <th>Title</th>
+              <th>Subject</th>
+              <th>Type</th>
+              <th>Item</th>
+            </tr>
+        </thead>
+        {% for ass in assessments %}
+          <tr>
+            <td>{{ ass["title"] }}</td>
+            <td>{{ ass["subject"] }}</td>
+            <td>{{ ass["type"] }}</td>
+            <td>{{ ass["length"] }}</td>
+            <td>
+                {% if active[0]["id"] != ass["id"] %}
+                    <form action="/deploy" method="POST">
+                        <input type="hidden" value="{{ ass['id'] }}" name="id">
+                        <input type="hidden" value="{{ ass['number'] }}" name="number">
+                        <input type="hidden" value="{{ ass['title'] }}" name="title">
+                        <input type="hidden" value="{{ ass['subject'] }}" name="subject">
+                        <input type="hidden" value="{{ ass['type'] }}" name="type">
+                        <input type="hidden" value="{{ ass['length'] }}" name="length">
+                        {% if len_act != 1 %}
+                            <button class="w3-green w3-button w3-round-xxlarge w3-hover-pink" type="submit">Deploy</button>
+                        {% else %}
+                            <button disabled class="w3-gray w3-round-xxlarge" type="submit">Deploy</button>
+                        {% endif %}
+                    </form>
+                {% else %}
+                    <form action="/terminate" method="POST">
+                        <input type="hidden" value="{{ ass['id'] }}" name="id">
+                        <button class="w3-red w3-round-xxlarge w3-padding w3-btn" type="submit">Stop</button>
+                    </form>
+                {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+    </table><br>
+</div>
+{% endblock %}

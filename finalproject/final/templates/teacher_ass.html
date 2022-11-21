@@ -1,0 +1,70 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Assessments
+{% endblock %}
+
+{% block main %}
+<div class="w3-padding">
+  <div class="w3-card-4">
+    <div class="w3-container my_light_blue">
+      <h2 class="w3-center"><strong>Assessment Creator</strong></h2>
+    </div>
+    <form action="/assessment" method="POST" class="w3-container w3-padding-24">
+      <div class="w3-row-padding">
+        <h5 class="w3-center"><strong>Assessment Number {{ number }}</strong></h5>
+        <div>
+          <label>Title/Description</label>
+          <input class="w3-input w3-border" name="title" type="text" placeholder="Title" required>
+        </div>
+      </div><br>
+      <div class="w3-row-padding" style="margin-bottom:50px">
+        <div class="w3-third">
+          <label>Number of questions</label>
+          <input autocomplete="off" class="w3-input w3-border" name="qnumber" min="5" placeholder="Minimum is 5 questions" type="number" required>
+        </div>
+        <div class="w3-third">
+          <label>Subject</label>
+          <input class="w3-input w3-border" name="subject" type="text" placeholder="Subject" required>
+        </div>
+        <div class="w3-third">
+          <label>Type</label><br>
+          <select class="w3-select w3-border" name="type" required>
+            <option disabled selected value="">None</option>
+            <option value="choices">Multiple Choices</option>
+            <option value="identification">Identification</option>
+          </select>
+        </div>
+      </div>
+      <button class="w3-btn w3-block w3-blue w3-hover-pink" type="submit"><strong>CREATE</strong></button>
+    </form>
+  </div>
+</div>
+<div class="w3-padding">
+  <h3>My Assessments</h3>
+  <table class="w3-table w3-bordered w3-border w3-hoverable my_light_blue">
+    <thead>
+        <tr>
+          <th>Title</th>
+          <th>Subject</th>
+          <th>Type</th>
+          <th>Edit</th>
+        </tr>
+    </thead>
+    {% for ass in assessments %}
+      <tr>
+        <td>{{ ass["title"] }}</td>
+        <td>{{ ass["subject"] }}</td>
+        <td>{{ ass["type"] }}</td>
+        <td>
+          <form action="/questions" method="POST">
+            <input type="hidden" value="{{ ass['id'] }}" name="ass_id">
+            <button type="submit">questions</button>
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </table><br>
+</div>
+{% endblock %}
+

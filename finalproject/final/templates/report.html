@@ -1,0 +1,58 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Report
+{% endblock %}
+
+{% block main %}
+<div class="w3-padding">
+  <div class="w3-container my_dark_blue">
+    <h2 class="w3-center"><strong>My Assessment  Report</strong></h2>
+  </div>
+  <table class="w3-table w3-bordered w3-border w3-hoverable my_light_blue">
+    {% if user[0]["position"] == "teacher" %}
+      <thead>
+          <tr>
+            <th>Title</th>
+            <th>Subject</th>
+            <th>Actions</th>
+            <th> </th>
+          </tr>
+      </thead>
+      {% for ass in reports %}
+        <tr>
+          <td>{{ ass["title"] }}</td>
+          <td>{{ ass["subject"] }}</td>
+          <td>
+            <form action="/report" method="POST">
+                <input type="hidden" value="{{ ass['id'] }}" name="id">
+                <button class="w3-blue" type="submit">Details</button>
+            </form>
+          </td>
+          <td>
+            <form action="/export" method="POST">
+                <input type="hidden" value="{{ ass['id'] }}" name="id">
+                <button class="w3-red" type="submit">Download</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <thead>
+          <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Score</th>
+          </tr>
+      </thead>
+      {% for rep in reports %}
+        <tr>
+          <td>{{ rep["time"] }}</td>
+          <td>{{ rep["ass_name"] }}</td>
+          <td>{{ rep["score"] }}</td>
+        </tr>
+      {% endfor %}
+    {% endif %}
+  </table><br>
+</div>
+{% endblock %}

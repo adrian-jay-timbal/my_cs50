@@ -1,0 +1,299 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{% block main %}
+
+<!-- Header -->
+<header class="w3-container" style="padding-top:22px">
+  <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+</header>
+
+<div class="w3-row-padding w3-margin-bottom w3-animate-top">
+  <div class="w3-quarter">
+    <div class="dashboard w3-container my_light_blue w3-padding-16">
+      <div class="w3-left w3-text-indigo"><i class="fa fa-bookmark w3-xxxlarge"></i></div>
+      <div class="w3-right w3-text-pink">
+        <h3>{{ m_count }}</h3>
+      </div>
+      <div class="w3-clear"></div>
+      <h4>Reminders</h4>
+    </div>
+  </div>
+  <div class="w3-quarter">
+    <div class="dashboard w3-container my_light_blue w3-padding-16">
+      <div class="w3-left w3-text-indigo"><i class="fa fa-pencil w3-xxxlarge"></i></div>
+      <div class="w3-right w3-text-pink">
+        <h3>{{ a_count }}</h3>
+      </div>
+      <div class="w3-clear"></div>
+      <h4>Assessments</h4>
+    </div>
+  </div>
+  <div class="w3-quarter">
+    <div class="dashboard w3-container my_light_blue w3-padding-16">
+      <div class="w3-left w3-text-indigo"><i class="fa fa-users w3-xxxlarge"></i></div>
+      <div class="w3-right w3-text-pink">
+        <h3>{{ students }}</h3>
+      </div>
+      <div class="w3-clear"></div>
+      <h4>Students</h4>
+    </div>
+  </div>
+  <div class="w3-quarter">
+    <div class="dashboard w3-container my_light_blue w3-padding-16">
+      <div class="w3-left w3-text-indigo"><i class="fa fa-share-alt w3-xxxlarge"></i></div>
+      <div class="w3-right w3-text-pink">
+        <h3>{{ f_count }}</h3>
+      </div>
+      <div class="w3-clear"></div>
+      <h4>Points</h4>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="w3-panel">
+  <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-third">
+      <h5>My Profile</h5>
+      <img src="/static/images/{{ profiles[0]['gender'] }}.png" style="width:100%" alt="Upload your photo on settings">
+    </div>
+    <div class="w3-twothird">
+      <h5>Philosophy</h5>
+      <table class="w3-table w3-striped w3-white">
+        <tr>
+          <td><i class="fa fa-users w3-text-blue w3-large"></i></td>
+          <td>First Name</td>
+          <td><i>{{ profiles[0]["firstname"] }}</i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-user w3-text-red w3-large"></i></td>
+          <td>Last Name</td>
+          <td><i>{{ profiles[0]["lastname"] }}</i></i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-calendar-times-o w3-text-yellow w3-large"></i></td>
+          <td>Age</td>
+          <td><i>{{ profiles[0]["age"] }}</i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-book w3-text-blue w3-large"></i></td>
+          <td>Major</td>
+          <td><i>{{ profiles[0]["major"] }}</i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-building w3-text-red w3-large"></i></td>
+          <td>School</td>
+          <td><i>{{ profiles[0]["school"] }}</i></td>
+        </tr>
+        <div class="w3-panel w3-leftbar my_philosophy">
+          <p class="w3-xxlarge w3-serif w3-center">
+              {{ profiles[0]["sayings"] }}
+          </p>
+        </div>
+        <h5>Informations</h5>
+      </table>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="w3-panel w3-black">
+  <div class="w3-row-padding" style="margin:0 -16px">
+    <div class="w3-third">
+      <h5>MY HOUSE</h5>
+      <img src="/static/houses/{{ profiles[0]['house'] }}.png" style="width:100%" alt="User Profile">
+      <h3><strong>{{ profiles[0]['house'] }}</strong></h3>
+    </div>
+    <div class="w3-twothird">
+      <h5>PROFILE</h5>
+      <table class="w3-table w3-striped w3-white">
+        <tr>
+          <td><i class="fa fa-users w3-text-blue w3-large"></i></td>
+          <td>Members</td>
+          <td><i>{{ house_count }}</i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-user w3-text-red w3-large"></i></td>
+          <td>Founder</td>
+          <td><i>
+            {% if profiles[0]['house'] == "Gryffindor" %}
+              Godric
+            {% elif profiles[0]['house'] == "Hufflepuff" %}
+              Helga
+            {% elif profiles[0]['house'] == "Ravenclaw" %}
+              Rowena
+            {% elif profiles[0]['house'] == "Slytherin" %}
+              Salazar
+            {% endif %}
+          </i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-building w3-text-yellow w3-large"></i></td>
+          <td>Color</td>
+          <td><i>
+            {% if profiles[0]['house'] == "Gryffindor" %}
+              Scarlet and Gold
+            {% elif profiles[0]['house'] == "Hufflepuff" %}
+              Yellow and Black
+            {% elif profiles[0]['house'] == "Ravenclaw" %}
+              Blue and Bronze
+            {% elif profiles[0]['house'] == "Slytherin" %}
+              Green and Silver
+            {% endif %}
+          </i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-building w3-text-red w3-large"></i></td>
+          <td>Animal</td>
+          <td><i>
+            {% if profiles[0]['house'] == "Gryffindor" %}
+              Lion
+            {% elif profiles[0]['house'] == "Hufflepuff" %}
+              Badger
+            {% elif profiles[0]['house'] == "Ravenclaw" %}
+              Eagle
+            {% elif profiles[0]['house'] == "Slytherin" %}
+              Snake
+            {% endif %}
+          </i></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-thumbs-up w3-text-blue w3-large"></i></td>
+          <td>Traits</td>
+          <td><i>
+            {% if profiles[0]['house'] == "Gryffindor" %}
+              Brave
+            {% elif profiles[0]['house'] == "Hufflepuff" %}
+              Loyal
+            {% elif profiles[0]['house'] == "Ravenclaw" %}
+              Wise
+            {% elif profiles[0]['house'] == "Slytherin" %}
+              Cunning
+            {% endif %}
+          </i></td>
+        </tr>
+      </table>
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h4 class="display-4">BACKGROUND</h4></h4>
+          <p class="lead">
+            {% if profiles[0]['house'] == "Gryffindor" %}
+              Gryffindor is one of the four Houses of Hogwarts School of Witchcraft and Wizardry and was founded by Godric Gryffindor.
+              Godric instructed the Sorting Hat to choose students possessing characteristics he most valued, such as courage, chivalry,
+              and determination, to be sorted into his house. The emblematic animal is a lion, and its colours are scarlet and gold.
+              Its members are generally regarded as brave, though sometimes to the point of recklessness. Some Gryffindors have also been noted to be short-tempered.
+            {% elif profiles[0]['house'] == "Hufflepuff" %}
+              Hufflepuff is one of the four Houses of Hogwarts School of Witchcraft and Wizardry. Its founder was the medieval witch Helga Hufflepuff.
+              Hufflepuff is the most inclusive among the four houses; valuing hard work, dedication, patience, loyalty,
+              and fair play rather than a particular aptitude in its members.
+              Students belonging to this house are known to be hard-working, friendly, loyal, honest and rather impartial. It may be that due to their values,
+              Hufflepuffs are not as competitive as the other houses, and are more modest about their accomplishments.
+            {% elif profiles[0]['house'] == "Ravenclaw" %}
+              Ravenclaw House prizes learning, wisdom, wit, and intellect in its members.[4] Thus, many Ravenclaws tend to be academically
+              motivated and talented students. They also pride themselves in being original in their ideas, and methods. It's not unusual
+              to find Ravenclaw students practising especially different types of magic that other houses might shun.
+              Often hard-working and diligent, as often is the case with intellectuals with a predisposition for academics, some of the pupils sorted under
+              the blue-bronzed eagle are known to be inclined to dismiss certain social expectation for the sake of satisfying their own intellectual curiosity.
+            {% elif profiles[0]['house'] == "Slytherin" %}
+              Slytherins tend to be ambitious, shrewd, cunning, strong leaders, and achievement-oriented. They also have highly developed senses of self-preservation.
+              This means that Slytherins tend to hesitate before acting, so as to weigh all possible outcomes before deciding exactly what should be done.
+              Slytherins tend to take charge and possess strong leadership skills. Slytherins are often self-assured and confident of their own competence and can be very loyal.
+              Another characteristic some Slytherins share is a tendency towards deep, unrequited love.
+            {% endif %}
+          </p>
+          <a style="text-decoration:none" href="https://neptolumbia.fandom.com/wiki/Hogwarts_Houses#The_Four_Houses_of_Hogwarts">From: neptolumbia.fandom.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
+<div class="w3-container my_dark_blue">
+  <h5 class="w3-text-white">Teachers</h5>
+  <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>House</th>
+        </tr>
+    </thead>
+    {% for teacher in teachers %}
+      <tr>
+        <td>{{ teacher["firstname"] }}</td>
+        <td>{{ teacher["house"] }}</td>
+      </tr>
+    {% endfor %}
+  </table><br>
+  <button class="w3-button w3-black w3-hover-pink">More <i class="fa fa-arrow-right"></i></button>
+  <hr>
+</div>
+<hr>
+<div class="w3-container">
+  <h5>New Students</h5>
+  <ul class="w3-ul w3-card-4 w3-white">
+    {% for new in new_student %}
+      <li class="w3-padding-16">
+        <img src="/static/images/{{ new['gender'] }}.png" class="w3-left w3-circle w3-margin-right" alt="image" style="width:35px">
+        <span class="w3-xlarge">{{ new["firstname" ]}}</span><br>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+<hr>
+
+<div class="w3-container">
+  <h5>Recent Post</h5>
+  {% if m_count != 0 %}
+  <div class="w3-row">
+    <div class="w3-col m2 text-center">
+      <img class="w3-circle" src="/static/images/reminder.png" style="width:96px;height:96px">
+    </div>
+      <div class="w3-col m10 w3-container">
+        <h4><span class="w3-opacity w3-medium">{{ reminder[0]['time']}}</span></h4>
+        <p>{{ reminder[0]['reminder'] }}</p><br>
+      </div>
+      {% else %}
+        <div><strong>NONE</strong></div>
+      {% endif %}
+<br>
+  </div>
+
+<div class="w3-container w3-dark-grey w3-padding-32">
+  <div class="w3-row">
+      <div class="w3-container w3-third">
+          <h5 class="w3-bottombar w3-border-pink">References</h5>
+          <p>w3school</p>
+          <p>Edx</p>
+          <p>Fontawesome</p>
+          <p>Bootsrap</p>
+          <p>cs50x</p>
+      </div>
+      <div class="w3-container w3-third">
+          <h5 class="w3-bottombar w3-border-blue">Social Media</h5>
+          <p>Facebook</p>
+          <p>Instagram</p>
+          <p>Tweeter</p>
+          <p>Discord</p>
+      </div>
+      <div class="w3-container w3-third">
+          <h5 class="w3-bottombar w3-border-indigo">About</h5>
+          <p>Users</p>
+          <p>History</p>
+          <p>License</p>
+          <p>Contact</p>
+      </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-padding-10 w3-light-grey">
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+    <p>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></p>
+</footer>
+
+{% endblock %}

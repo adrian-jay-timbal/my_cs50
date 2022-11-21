@@ -1,0 +1,62 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Assessments
+{% endblock %}
+
+{% block main %}
+<div class="w3-padding">
+  <div class="w3-card-4">
+    {% if len_active != 0 %}
+      <div class="w3-container my_dark_blue">
+        <h2 class="w3-center"><strong>Online</strong></h2>
+      </div>
+      <div class="w3-row-padding">
+        <div>
+          <h1><strong>Title: {{ active[0]['title'] }}</strong></h1>
+        </div>
+      </div><br>
+      <div class="w3-row-padding" style="margin-bottom:50px">
+        <div class="w3-third">
+          <h3><strong>Length:</strong> {{ active[0]['length'] }} questions</h3>
+        </div>
+        <div class="w3-third">
+          <h3><strong>Subject:</strong> {{ active[0]['subject'] }}</h3>
+        </div>
+        <div class="w3-third">
+          <h3><strong>Exam type:</strong> {{ active[0]['type'] }}</h3>
+        </div>
+      </div>
+      <a href="/take" style="text-decoration:none"><button class="w3-btn w3-block w3-blue"><strong>START</strong></button></a>
+      <small class="w3-padding">Note: Exam has time limit. Be sure to get ready before you start.</small>
+    {% else %}
+      <div class="w3-container my_light_blue">
+        <h2 class="w3-center"><strong>Offline</strong></h2>
+      </div>
+      <div class="w3-padding">
+        <h3>No active assessment yet.</h3>
+      </div>
+    {% endif %}
+  </div>
+</div>
+<div class="w3-padding">
+  <h3>My Assessments History</h3>
+  <table class="w3-table w3-bordered w3-border w3-hoverable my_light_blue">
+    <thead>
+        <tr>
+          <th>Date</th>
+          <th>Title</th>
+          <th>My Score</th>
+        </tr>
+    </thead>
+    {% for ass in myreport %}
+      <tr>
+        <td>{{ ass["time"] }}</td>
+        <td>{{ ass["ass_name"] }}</td>
+        <td>{{ ass["score"] }}</td>
+      </tr>
+    {% endfor %}
+  </table><br>
+</div>
+{% endblock %}
+

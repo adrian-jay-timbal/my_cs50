@@ -1,0 +1,68 @@
+{% extends "main_layout.html" %}
+
+{% block title %}
+  Setttings
+{% endblock %}
+
+{% block main %}
+<div class="my_light_blue">
+    <form action="/settings" method="POST"><br>
+        <div class="w3-padding">
+            <div class="w3-half">
+                <h1><strong>MY PROFILE</strong></h1>
+            </div>
+            <div class="w3-half w3-margin-top">
+                <span class="w3-right">
+                    <a><button class="w3-btn w3-round-xxlarge w3-blue w3-hover-pink" type="submit">Save Settings</button></a>
+                </span>
+            </div>
+        </div><br>
+
+        <div class="w3-row-padding">
+            <div class="w3-third w3-section">
+                <label><strong>FIRST NAME</strong></label>
+                <input class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ profiles[0]['firstname'] }}" name="firstname">
+            </div>
+            <div class="w3-third w3-section">
+                <label><strong>LAST NAME</strong></label>
+                <input class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ profiles[0]['lastname'] }}" name="lastname">
+            </div>
+            <div class="w3-third w3-section">
+                <label><strong>AGE</strong></label>
+                <input class="w3-input w3-border w3-padding" type="number" min="10" placeholder="How old are you?" value="{{ profiles[0]['age'] }}" name="age">
+            </div>
+            <div class="w3-half w3-section">
+                <label><strong>MY MAJOR</strong></label>
+                <input class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ profiles[0]['major'] }}" name="major">
+            </div>
+            <div class="w3-half w3-section">
+                <label><strong>MY SCHOOL</strong></label>
+                <input class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ profiles[0]['school'] }}" name="school">
+            </div>
+            <div class="w3-third w3-section">
+                <label><strong>GENDER</strong></label>
+                <input readonly class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ profiles[0]['gender'] }}">
+                <small class="w3-text-red">Permanent</small>
+            </div>
+            <div class="w3-third w3-section">
+                <label><strong>EMAIL ADDRESS</strong></label>
+                <input readonly class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ user[0]['email'] }}">
+                <small class="w3-text-red">Permanent</small>
+            </div>
+            <div class="w3-third w3-section">
+                <label><strong>USERNAME</strong></label>
+                <input readonly class="w3-input w3-border w3-padding" type="text" placeholder="Add" value="{{ user[0]['username'] }}">
+                <small class="w3-text-red">Permanent</small>
+            </div>
+        </div>
+
+        <div class="w3-padding w3-section">
+            <label><strong>MY PHILOSOPHY</strong></label>
+            <input class="w3-input w3-border w3-padding philarea" type="text" placeholder="Add" value="{{ profiles[0]['sayings'] }}" name="sayings">
+        </div>
+    </form>
+    <div class="w3-padding w3-section w3-center">
+        <a href="/password"><button class="w3-btn w3-round-xxlarge w3-blue w3-hover-pink">Change Password</button></a>
+    </div>
+</div>
+{% endblock %}
