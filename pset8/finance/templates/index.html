@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td class="blue">TOTAL</td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td class="blue">${{ total_cash }}</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for report in reports %}
+                <tr>
+                    <td>{{ report["stock"] }}</td>
+                    <td>{{ report["name"] }}</td>
+                    <td>{{ report["share"] }}</td>
+                    <td>${{ report["cost"] }}</td>
+                    <td>${{ report["total"] }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td class="yellow">CASH</td>
+                <td> </td>
+                <td> </td>
+                <td> </td>
+                <td class="yellow">${{ balance }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+
